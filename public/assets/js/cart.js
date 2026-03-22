@@ -99,27 +99,40 @@ function removeFromCart(id, category) {
     updateCartCount();
 }
 
-// Checkout via WhatsApp
-document.getElementById('checkout-whatsapp')?.addEventListener('click', () => {
-    const cart = JSON.parse(localStorage.getItem('gsmCart')) || [];
-    if (cart.length === 0) return alert('Rukwama yako iko tupu.');
-
-    let message = `*AGIZO KUTOKA GSM FASHION 2026*\n\n`;
+function checkoutViaWhatsApp() {
+    const cartItems = JSON.parse(localStorage.getItem('gsmCart')) || [];
+    if (cartItems.length === 0) {
+        alert('Rukwama yako iko tupu!');
+        return;
+    }
+    
+    let message = 'AGIZO KUTOKA GSM FASHION 2026\n\n';
     let subtotal = 0;
-    cart.forEach(item => {
+    
+    for (let item of cartItems) {
         const product = findProductById(item.id, item.category);
         if (product) {
             const itemTotal = product.price * item.quantity;
             subtotal += itemTotal;
-            message += `- ${product.name} x${item.quantity} = Tsh ${itemTotal.toLocaleString()}/=\n`;
+            message += `${product.name} × ${item.quantity} = Tsh ${itemTotal.toLocaleString()}/=\n`;
         }
-    });
+    }
+    
     const shipping = subtotal > 200000 ? 0 : 5000;
     const total = subtotal + shipping;
-    message += `\nJumla: Tsh ${subtotal.toLocaleString()}/=`;
-    message += `\nUsafirishaji: ${shipping === 0 ? 'Bure' : 'Tsh ' + shipping.toLocaleString() + '/='}`;
-    message += `\nJumla Kuu: Tsh ${total.toLocaleString()}/=`;
-    message += `\n\nAsante kwa kununua GSM Fashion 2026!`;
+    
+    message += `\n`;
+    message += `Jumla ya Bei: Tsh ${subtotal.toLocaleString()}/=\n`;
+    message += `Usafirishaji: ${shipping === 0 ? 'Bure' : 'Tsh ' + shipping.toLocaleString() + '/='}\n`;
+    message += `Jumla Kuu: Tsh ${total.toLocaleString()}/=`;
+    
+    const whatsappUrl = `https://wa.me/255686835513?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
 
-    window.open(`https://wa.me/255686835513?text=${encodeURIComponent(message)}`, '_blank');
+document.addEventListener('DOMContentLoaded', () => {
+    const checkoutBtn = document.getElementById('checkout-whatsapp');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', checkoutViaWhatsApp);
+    }
 });

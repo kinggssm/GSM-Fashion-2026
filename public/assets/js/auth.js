@@ -20,12 +20,17 @@ function updateAuthUI() {
         if (!document.getElementById('logout-btn')) {
             const logoutLi = document.createElement('li');
             logoutLi.id = 'logout-btn';
-            logoutLi.innerHTML = '<a href="#" class="text-gray-700 hover:text-orange-500"><i class="fas fa-sign-out-alt"></i> Toka</a>';
+            logoutLi.classList.add('auth-link');
+            logoutLi.innerHTML = '<a href="#" class="text-gray-700 hover:text-orange-500 logout-link"><i class="fas fa-sign-out-alt"></i> Toka</a>';
             authLink.parentNode.appendChild(logoutLi);
-            logoutLi.addEventListener('click', () => {
-                localStorage.removeItem('gsmToken');
-                localStorage.removeItem('gsmUser');
-                window.location.href = './index.html';
+            const logoutLink = logoutLi.querySelector('.logout-link');
+            logoutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (confirm('Je, unataka kuondoka?')) {
+                    localStorage.removeItem('gsmToken');
+                    localStorage.removeItem('gsmUser');
+                    window.location.href = '/index.html';
+                }
             });
         }
     } else {
@@ -47,11 +52,15 @@ async function login(email, password) {
             localStorage.setItem('gsmToken', data.token);
             localStorage.setItem('gsmUser', JSON.stringify(data.user));
             showMessage('Umeingia kwa mafanikio!', 'success');
-            window.location.href = './index.html';
+            // Use absolute path to ensure proper redirect
+            setTimeout(() => {
+                window.location.href = '/index.html';
+            }, 500);
         } else {
             showMessage(data.error || 'Hitilafu wakati wa kuingia', 'error');
         }
     } catch (error) {
+        console.error('Login error:', error);
         showMessage('Tatizo la mtandao. Jaribu tena.', 'error');
     }
 }
@@ -76,7 +85,10 @@ async function register(name, email, phone, location, password) {
             if (loginRes.ok) {
                 localStorage.setItem('gsmToken', loginData.token);
                 localStorage.setItem('gsmUser', JSON.stringify(loginData.user));
-                window.location.href = './index.html';
+                // Use absolute path to ensure proper redirect
+                setTimeout(() => {
+                    window.location.href = '/index.html';
+                }, 500);
             } else {
                 showMessage('Usajili umefanikiwa, lakini kuingia kulishindwa. Tafadhali ingia manually.', 'error');
             }
@@ -84,6 +96,7 @@ async function register(name, email, phone, location, password) {
             showMessage(data.error || 'Hitilafu wakati wa kujisajili', 'error');
         }
     } catch (error) {
+        console.error('Registration error:', error);
         showMessage('Tatizo la mtandao. Jaribu tena.', 'error');
     }
 }
