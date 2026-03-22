@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingia / Jisajili - GSM Fashion 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+
+    <div class="min-h-screen flex items-center justify-center px-4 py-12">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-8">
+            <div class="flex border-b mb-6">
+                <button id="login-tab" class="flex-1 py-2 text-center font-semibold text-orange-500 border-b-2 border-orange-500">Ingia</button>
+                <button id="register-tab" class="flex-1 py-2 text-center font-semibold text-gray-500 hover:text-orange-500">Jisajili</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 mb-1">Barua pepe</label>
+                    <input type="email" id="login-email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="mtumiaji@example.com">
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-1">Nywila</label>
+                    <input type="password" id="login-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="******">
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="remember-me" class="mr-2"> Nikumbuke
+                    </label>
+                    <a href="#" class="text-orange-500 hover:underline">Umesahau nywila?</a>
+                </div>
+                <button id="login-btn" class="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition">Ingia</button>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-gray-700 mb-1">Jina kamili</label>
+                    <input type="text" id="register-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Jina lako">
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-1">Barua pepe</label>
+                    <input type="email" id="register-email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="mtumiaji@example.com">
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-1">Namba ya simu (hiari)</label>
+                    <input type="tel" id="register-phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="0686835513">
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-1">Eneo (hiari)</label>
+                    <input type="text" id="register-location" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Mwanza">
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-1">Nywila</label>
+                    <input type="password" id="register-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Angalau herufi 6">
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-1">Thibitisha nywila</label>
+                    <input type="password" id="register-confirm-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Weka nywila tena">
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="terms" class="mr-2"> <span class="text-sm">Nakubali <a href="#" class="text-orange-500">Sheria na Masharti</a></span>
+                </div>
+                <button id="register-btn" class="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition">Jisajili</button>
+            </div>
+
+            <div id="message-area" class="mt-4 text-center text-sm hidden"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>
